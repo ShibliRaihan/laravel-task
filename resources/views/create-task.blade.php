@@ -855,14 +855,30 @@
                 @endauth
             </div>
         @endif
-        @php
-            $task->completed == true ? $text = "text-white" : $text = "text-danger";
-        @endphp
-        <h1 class="{{ $text }}">
-            {{ $task->title }}
-        </h1>
-        <p class="{{ $text }}"><span class="{{ $text }}">Decriptin:</span> {{ $task->description }}</p>
+        
+        <div class="container text-white pt-5">
+            <div class="row">
+                <div class="col-6 m-auto border p-4 rounded">
+                    <form action="{{ route('create') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label>Title*</label>
+                            <input type="text" name="title" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Description*</label>
+                            <textarea name="description" class="form-control"> </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Long Description*</label>
+                            <textarea name="long_description" class="form-control"> </textarea>
+                        </div>
+                        <input type="submit" value="Save" class="border px-3 py-2 mt-3">
+                    </form>
+                </div>
+            </div>
         </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
