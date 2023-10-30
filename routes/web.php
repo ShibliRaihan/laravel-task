@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $tasks = Task::all();
+    return view('task', ['tasks'=>$tasks]);
 });
+
+Route::get('/single/task/{id}', function ($id) {
+    // $task = Task::findOrFail(1);
+
+    // if (!$task) {
+    //     return abort(404); 
+    // }
+
+    // return view('singel-task', ['task' => $task]);
+    $task = Task::findOrFail($id);
+    return view('singel-task',['task' => $task]) ;
+
+})->name('singel.task');
