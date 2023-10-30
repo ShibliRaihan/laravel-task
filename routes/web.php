@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Task;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,15 @@ Route::get('/', function () {
 Route::get('/create-task', function () {
     return view('create-task');
 })->name('create.task');
-Route::post('/create-task', function () {
-dd($_POST);
+Route::post('/create-task', function (Request $request) {
+    $task = [
+        'title'=> $request->input('title'),
+        'description'=> $request->input('description'),
+        'long_description'=> $request->input('long_description'),
+        'completed'=> true,
+    ];
+    Task::create($task);
+    return redirect('/');
 })->name('create');
 Route::get('/single/task/{id}', function ($id) {
     $task = Task::findOrFail($id);
