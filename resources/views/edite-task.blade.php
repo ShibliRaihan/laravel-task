@@ -833,9 +833,7 @@
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <!-- Option 1: Include in HTML -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    </head>
+</head>
 
 <body class="antialiased">
     <div
@@ -857,49 +855,43 @@
                 @endauth
             </div>
         @endif
-        <div class="container pt-5">
-            <a class="text-white text-decoration-none border p-3 rounded" href="{{ route('create.task') }}">Add <i class="bi bi-clipboard-plus"></i></a>
+
+        <div class="container text-white pt-5">
             <div class="row">
-                <div class="col">
-                    <h3 class="text-success text-center p-3">Completed</h3>
-                    @foreach ($tasks as $item)
-                        <ul class="">
-                            <li class="border p-2 rounded">
-                                <p class="text-white d-inline">{{ $item->title }}</p>
-                                <a href="{{ route('singel.task', ['id' => $item->id]) }}">
-                                    <button class="btn-sm ms-2">view</button>
-                                </a>
-                                <a href="{{ route('edite.task', ['task' => $item->id]) }}">
-                                    <button class="btn-sm ms-2 text-white">edite</button>
-                                </a>
-                            </li>
-                        </ul>
-                    @endforeach
-                </div>
-                <div class="col">
-                    <h3 class="text-center text-danger p-3">Uncompleted</h3>
-                    @foreach ($tasksFalse as $item)
-                        <ul class="">
-                            <li class="border p-2 rounded">
-                                <p class="text-danger d-inline">{{ $item->title }}</p>
-                                <a href="{{ route('singel.task', ['id' => $item->id]) }}">
-                                    <button class="btn-sm ms-2">view</button>
-                                </a>
-                                <a href="{{ route('edite.task', ['task' => $item->id]) }}">
-                                    <button class="btn-sm ms-2 text-white">edite</button>
-                                </a>
-                            </li>
-                        </ul>
-                    @endforeach
+                <div class="col-6 m-auto border p-4 rounded">
+                    <form action="{{ route('put', ['task' => $task->id]) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label>Title*</label>
+                            <input type="text" name="title" class="form-control" value="{{ $task->title }}">
+                            @error('title')
+                                <p class="bg-danger mt-2 rounded p-1">{{ $errors->getBag('default')->first('title') }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Description*</label>
+                            <textarea name="description" class="form-control"> {{ $task->description }}</textarea>
+                            @error('title')
+                                <p class="bg-danger mt-2 rounded p-1">{{ $errors->getBag('default')->first('description') }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Long Description*</label>
+                            <textarea name="long_description" class="form-control" rows="10"> {{ $task->long_description }} </textarea>
+                            @error('title')
+                                <p class="bg-danger mt-2 rounded p-1">{{ $errors->getBag('default')->first('long_description') }}</p>
+                            @enderror
+                        </div>
+                        <input type="submit" value="Save" class="border px-3 py-2 mt-3">
+                    </form>
                 </div>
             </div>
-
-
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>

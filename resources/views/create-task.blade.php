@@ -861,17 +861,26 @@
                 <div class="col-6 m-auto border p-4 rounded">
                     <form action="{{ route('create') }}" method="post">
                         @csrf
-                        <div class="form-group">
+                         <div class="form-group">
                             <label>Title*</label>
-                            <input type="text" name="title" class="form-control">
+                            <input type="text" name="title" class="form-control"">
+                            @error('title')
+                                <p class="bg-danger mt-2 rounded p-1">{{ $errors->getBag('default')->first('title') }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Description*</label>
                             <textarea name="description" class="form-control"> </textarea>
+                            @error('title')
+                                <p class="bg-danger mt-2 rounded p-1">{{ $errors->getBag('default')->first('description') }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Long Description*</label>
-                            <textarea name="long_description" class="form-control"> </textarea>
+                            <textarea name="long_description" class="form-control" rows="10">  </textarea>
+                            @error('title')
+                                <p class="bg-danger mt-2 rounded p-1">{{ $errors->getBag('default')->first('long_description') }}</p>
+                            @enderror
                         </div>
                         <input type="submit" value="Save" class="border px-3 py-2 mt-3">
                     </form>
