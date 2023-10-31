@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Requests\Task_Request;
+use App\Http\Requests\TaskRequest;
 use Illuminate\Support\Facades\Route;
 use App\Models\Task;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,27 +36,16 @@ Route::get('/create-task', function () {
     return view('create-task');
 })->name('create.task');
 #create request...
-Route::post('/create-task', function (Task_Request $request) {
-    $task = new Task();
-    $task = $request->validated();
-    $task->title = $request['title'];
-    $task->description = $request['description'];
-    $task->long_description = $request['long_description'];
-    $task->completed = true;
-    $task->save();
+Route::post('/create-tasks', function (TaskRequest $request) {
+    Task::create($request->validated());
     return redirect('/');
 })->name('create');
 #task edite
-Route::get('/edite/task/{task}', function (task $task) {
+Route::get('/edite/task/{task}', function (Task $task) {
     return view('edite-task', ['task' => $task]);
 })->name('edite.task');
 #task edite put
-Route::put('/edit-task/{task}', function (Task $task, Task_Request $request) {
-    $task = $request->validated();
-    $task->title = $request['title'];
-    $task->description = $request['description'];
-    $task->long_description = $request['long_description'];
-    $task->completed = true;
-    $task->save();
+Route::put('/edit-task/{task}', function (Task $task, TaskRequest $request) {
+    $task->update($request->validated());
     return redirect('/');
 })->name('put');
