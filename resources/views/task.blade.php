@@ -834,8 +834,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Option 1: Include in HTML -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
 
 <body class="antialiased">
     <div
@@ -858,7 +858,8 @@
             </div>
         @endif
         <div class="container pt-5">
-            <a class="text-white text-decoration-none border p-3 rounded" href="{{ route('create.task') }}">Add <i class="bi bi-clipboard-plus"></i></a>
+            <a class="text-white text-decoration-none border p-3 rounded" href="{{ route('create.task') }}">Add <i
+                    class="bi bi-clipboard-plus"></i></a>
             <div class="row">
                 <div class="col">
                     <h3 class="text-success text-center p-3">Completed</h3>
@@ -872,6 +873,11 @@
                                 <a href="{{ route('edite.task', ['task' => $item->id]) }}">
                                     <button class="btn-sm ms-2 text-white">edite</button>
                                 </a>
+                                <form class="d-inline" action="{{ route('delete.task', ['task' => $item->id]) }}" method="post">
+                                    @csrf
+                                    @method("delete")
+                                        <button class="btn-sm ms-2 text-danger">delete</button>
+                                </form>
                             </li>
                         </ul>
                     @endforeach
@@ -888,6 +894,11 @@
                                 <a href="{{ route('edite.task', ['task' => $item->id]) }}">
                                     <button class="btn-sm ms-2 text-white">edite</button>
                                 </a>
+                                <form class="d-inline" action="{{ route('delete.task', ['task' => $item->id]) }}" method="post">
+                                    @csrf
+                                    @method("delete")
+                                        <button class="btn-sm ms-2 text-danger">delete</button>
+                                </form>
                             </li>
                         </ul>
                     @endforeach
