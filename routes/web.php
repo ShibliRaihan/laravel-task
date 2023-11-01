@@ -8,7 +8,7 @@ use App\Models\Task;
 Route::get('/', function () {
     $tasks = Task::latest()
         ->where('completed', true)
-        ->get();
+        ->paginate(2);
     $tasksFalse = Task::latest()
         ->where('completed', false)
         ->get();

@@ -881,6 +881,9 @@
                             </li>
                         </ul>
                     @endforeach
+                    @if ($tasks->count())
+                        {{ $tasks->links() }}
+                    @endif
                 </div>
                 <div class="col">
                     <h3 class="text-center text-danger p-3">Uncompleted</h3>
